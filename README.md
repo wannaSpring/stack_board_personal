@@ -23,7 +23,7 @@ A Flutter package of custom stack board.
 <br>
 
 ```dart
-import 'package:stack_board/stack_board.dart';
+import 'package:stack_board_personal/stack_board.dart';
 
 StackBoard(
     controller: _boardController,
@@ -269,6 +269,10 @@ Stack(
             onDel: () async {},
             onOffsetChanged: (Offset offset) {},
             onSizeChanged: (Size size) {},
+            toolConfiguration: const {
+                OperatConfiguration.roate: false,
+                OperatConfiguration.scale: false
+            },
         ),
     ],
 )

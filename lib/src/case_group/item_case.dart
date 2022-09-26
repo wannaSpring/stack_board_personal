@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
-import 'package:stack_board/src/helper/case_style.dart';
-import 'package:stack_board/src/helper/operat_state.dart';
+import 'package:stack_board_personal/src/helper/case_style.dart';
+import 'package:stack_board_personal/src/helper/operat_state.dart';
 
 /// 配置项
 class _Config {
@@ -51,6 +51,7 @@ class ItemCase extends StatefulWidget {
     this.onOffsetChanged,
     this.onAngleChanged,
     this.onTap,
+    this.toolConfiguration,
   }) : super(key: key);
 
   @override
@@ -95,6 +96,8 @@ class ItemCase extends StatefulWidget {
 
   /// 操作状态回调
   final bool? Function(OperatState)? onOperatStateChanged;
+
+  final Map<OperatConfiguration, bool>? toolConfiguration;
 }
 
 class _ItemCaseState extends State<ItemCase> with SafeState<ItemCase> {
@@ -349,12 +352,24 @@ class _ItemCaseState extends State<ItemCase> with SafeState<ItemCase> {
             _border,
             _child,
             if (widget.tools != null) _tools,
-            if (widget.canEdit && _operatState != OperatState.complate) _edit,
-            if (_operatState != OperatState.complate) _roate,
-            if (_operatState != OperatState.complate) _check,
-            if (widget.onDel != null && _operatState != OperatState.complate)
+            if (widget.canEdit &&
+                _operatState != OperatState.complate &&
+                widget.toolConfiguration?[OperatConfiguration.edit] != false)
+              _edit,
+            if (_operatState != OperatState.complate &&
+                widget.toolConfiguration?[OperatConfiguration.roate] != false)
+              _roate,
+            if (_operatState != OperatState.complate &&
+                widget.toolConfiguration?[OperatConfiguration.complate] !=
+                    false)
+              _check,
+            if (widget.onDel != null &&
+                _operatState != OperatState.complate &&
+                widget.toolConfiguration?[OperatConfiguration.del] != false)
               _del,
-            if (_operatState != OperatState.complate) _scale,
+            if (_operatState != OperatState.complate &&
+                widget.toolConfiguration?[OperatConfiguration.scale] != false)
+              _scale,
           ]),
         ),
       ),

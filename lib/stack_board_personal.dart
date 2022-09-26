@@ -1,4 +1,4 @@
-library stack_board;
+library stack_board_personal;
 
 export 'src/board.dart';
 export 'src/case_group/item_case.dart';

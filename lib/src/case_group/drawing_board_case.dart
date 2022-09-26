@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
-import 'package:stack_board/src/helper/operat_state.dart';
-import 'package:stack_board/src/item_group/stack_drawing.dart';
+import 'package:stack_board_personal/src/helper/operat_state.dart';
+import 'package:stack_board_personal/src/item_group/stack_drawing.dart';
 
 import 'item_case.dart';
 

@@ -2,7 +2,7 @@ library stack_board;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
-import 'package:stack_board/src/helper/operat_state.dart';
+import 'package:stack_board_personal/src/helper/operat_state.dart';
 
 import 'case_group/adaptive_text_case.dart';
 import 'case_group/drawing_board_case.dart';

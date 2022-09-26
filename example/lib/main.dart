@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:stack_board/stack_board.dart';
+import 'package:stack_board_personal/stack_board.dart';
 
 ///自定义类型 Custom item type
 class CustomItem extends StackBoardItem {
@@ -139,6 +139,10 @@ class _HomePageState extends State<HomePage> {
               isCenter: false,
               onDel: () async => _boardController.remove(t.id),
               onTap: () => _boardController.moveItemToTop(t.id),
+              toolConfiguration: const {
+                OperatConfiguration.roate: false,
+                OperatConfiguration.scale: false
+              },
               caseStyle: const CaseStyle(
                 borderColor: Colors.grey,
                 iconColor: Colors.white,
@@ -149,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                 color: t.color,
                 alignment: Alignment.center,
                 child: const Text(
-                  'Custom item',
+                  'Custom itemssss',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

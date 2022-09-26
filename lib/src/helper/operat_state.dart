@@ -24,3 +24,23 @@ enum OperatState {
   /// 编辑完成
   complate,
 }
+
+enum OperatConfiguration {
+  /// 编辑
+  edit,
+
+  /// 移动
+  move,
+
+  /// 缩放
+  scale,
+
+  /// 旋转
+  roate,
+
+  /// 状态
+  del,
+
+  /// 完成
+  complate,
+}
