@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:stack_board_personal/stack_board.dart';
+import 'package:stack_board_personal/stack_board_personal.dart';
 
 ///自定义类型 Custom item type
 class CustomItem extends StackBoardItem {

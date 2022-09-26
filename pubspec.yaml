@@ -1,6 +1,6 @@
 name: stack_board_personal
 description: A Flutter package of stack board, components that can be stacked and edited for any widget.
-version: 0.1.2
+version: 0.1.3
 homepage: https://github.com/wannaSpring/stack_board_personal
 
 environment:

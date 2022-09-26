@@ -52,6 +52,7 @@ class ItemCase extends StatefulWidget {
     this.onAngleChanged,
     this.onTap,
     this.toolConfiguration,
+    this.minSize,
   }) : super(key: key);
 
   @override
@@ -71,6 +72,9 @@ class ItemCase extends StatefulWidget {
 
   /// 外框样式
   final CaseStyle? caseStyle;
+
+  /// 最小尺寸
+  final Size? minSize;
 
   /// 点击进行编辑，默认false
   final bool tapToEdit;
@@ -229,7 +233,9 @@ class _ItemCaseState extends State<ItemCase> with SafeState<ItemCase> {
     // double w = size.width + d.dx;
     // double h = size.height + d.dy;
 
-    final double min = _caseStyle.iconSize * 3;
+    final double min = widget.minSize != null
+        ? math.min(widget.minSize!.width, widget.minSize!.height)
+        : _caseStyle.iconSize * 3;
 
     Offset start = _config.value.offset! +
         Offset(-_caseStyle.iconSize / 2, _caseStyle.iconSize * 2);
