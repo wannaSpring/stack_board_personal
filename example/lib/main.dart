@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:stack_board_personal/stack_board.dart';
 import 'package:stack_board_personal/stack_board_personal.dart';
 
 ///自定义类型 Custom item type
@@ -29,8 +28,8 @@ class CustomItem extends StackBoardItem {
     Color? color,
   }) =>
       CustomItem(
-        onDel: onDel,
-        id: id,
+        id: id ?? this.id,
+        onDel: onDel ?? this.onDel,
         color: color ?? this.color,
       );
 }
@@ -135,11 +134,19 @@ class _HomePageState extends State<HomePage> {
         /// 使用这个接口进行重构
         customBuilder: (StackBoardItem t) {
           if (t is CustomItem) {
+            List<StackBoardItem>? test;
+            CustomItem newTest;
             return ItemCase(
               key: Key('StackBoardItem${t.id}'), // <==== must
               isCenter: false,
               onDel: () async => _boardController.remove(t.id),
-              onTap: () => _boardController.moveItemToTop(t.id),
+              onTap: () => {
+                print(_boardController.getCurrentSelected([])),
+                test = _boardController.getCurrentSelected([t.id]),
+                newTest = t.copyWith(color: Colors.black),
+                _boardController.changeCurrentSelected([newTest]),
+                // _boardController.moveItemToTop(t.id),
+              },
               toolConfiguration: const {
                 OperatConfiguration.roate: false,
                 OperatConfiguration.scale: false

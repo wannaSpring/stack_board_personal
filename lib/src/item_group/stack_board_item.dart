@@ -9,8 +9,15 @@ class StackBoardItem {
     this.id,
     this.onDel,
     this.caseStyle,
+    this.color,
+    this.x,
+    this.y,
     this.tapToEdit = false,
   });
+
+  final Color? color;
+  final double? x;
+  final double? y;
 
   /// item id
   final int? id;

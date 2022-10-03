@@ -1,5 +1,7 @@
 library stack_board;
 
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:stack_board_personal/src/helper/operat_state.dart';
@@ -11,6 +13,17 @@ import 'helper/case_style.dart';
 import 'item_group/adaptive_text.dart';
 import 'item_group/stack_board_item.dart';
 import 'item_group/stack_drawing.dart';
+
+class Config {
+  const Config({this.color, this.x, this.y, this.id, this.caseStyle}) : super();
+
+  final Color? color;
+  final CaseStyle? caseStyle;
+
+  final double? x;
+  final double? y;
+  final int? id;
+}
 
 /// 层叠板
 class StackBoard extends StatefulWidget {
@@ -107,6 +120,31 @@ class _StackBoardState extends State<StackBoard> with SafeState<StackBoard> {
     _children.clear();
     _lastId = 0;
     safeSetState(() {});
+  }
+
+  // 当前操作
+  List<StackBoardItem> _getCurrentSelected(List<int?>? idList) {
+    if (idList == null || idList.isEmpty) return [];
+
+    final List<StackBoardItem> item = _children.where((StackBoardItem i) {
+      return idList.contains(i.id);
+    }).toList();
+    print(item);
+    return item;
+  }
+
+  // 修改当前选择的实体
+  void _changeCurrentSelected<T extends StackBoardItem>(List<T> items) {
+    if (items.isEmpty) return;
+    items.forEach((t) {
+      _children.removeWhere((StackBoardItem i) => i.id == t.id);
+      _children.add(t);
+      safeSetState(() {});
+    });
+
+    // items.forEach((element) {
+    //   element.copyWith();
+    // });
   }
 
   /// 取消全部选中
@@ -220,6 +258,19 @@ class StackBoardController {
   void add<T extends StackBoardItem>(T item) {
     _check();
     _stackBoardState?._add<T>(item);
+  }
+
+  List<StackBoardItem>? getCurrentSelected(List<int?>? idList) {
+    _check();
+    if (idList == null) {
+      return _stackBoardState?._getCurrentSelected([_stackBoardState?._lastId]);
+    }
+    return _stackBoardState?._getCurrentSelected(idList);
+  }
+
+  void changeCurrentSelected<T extends StackBoardItem>(List<T> items) {
+    _check();
+    _stackBoardState?._changeCurrentSelected(items);
   }
 
   /// 移除
